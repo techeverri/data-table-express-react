@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const fetch = require('node-fetch');
 
 const app = express();
 
@@ -12,6 +13,13 @@ app.get('/', (req, res) => {
 });
 
 app.get('/ping', (req, res) => res.send('pong'));
+
+app.get('/data', async (req, res) => {
+  const result = await fetch(process.env.API_URL);
+  const data = await result.json();
+
+  return res.json(data);
+});
 
 app.listen(PORT, () => {
   console.log(`🚀 Server ready on port ${PORT}`);
