@@ -1,48 +1,65 @@
+import qs from 'qs';
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import { ENTRIES_PER_PAGE, INITIAL_PAGE } from './constants';
+import PaginationControls from './PaginationControls';
+import Search from './Search';
+import Table from './Table';
+import useDebounce from './useDebounce';
 
 function App() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({ entries: [] });
+  const [page, setPage] = useState(INITIAL_PAGE);
+  const [limit, setLimit] = useState(ENTRIES_PER_PAGE);
+
+  const [search, setSearch] = useState('');
+  const debouncedSearch = useDebounce(search, 250);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('/data');
-      const data = await response.json();
+      const query = qs.stringify({ page, limit, search: debouncedSearch });
+      const path = '/data';
+      const url = `${path}?${query}`;
 
-      setData(data.output);
+      const response = await fetch(url);
+
+      const { entries, from, to, total, pages } = await response.json();
+      setData({ entries, from, to, total, pages });
     };
 
     fetchData();
-  }, []);
+  }, [page, limit, debouncedSearch]);
+
+  const { entries, from, to, total, pages } = data;
 
   return (
     <>
-      <header>Data Table</header>
+      <header>
+        <h1>Data Table</h1>
+      </header>
       <main>
-        <table>
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Name</th>
-              <th>Status</th>
-              <th>Description</th>
-              <th>Delta</th>
-              <th>CreatedOn</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map(item => (
-              <tr>
-                <td>{item.id}</td>
-                <td>{item.name}</td>
-                <td>{item.status}</td>
-                <td>{item.description}</td>
-                <td>{item.delta}</td>
-                <td>{item.createdOn}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        {entries.length === 0 ? (
+          <div>Loading...</div>
+        ) : (
+          <>
+            <Search
+              limit={limit}
+              onLimitChange={limit => setLimit(limit)}
+              onSearchChange={search => setSearch(search)}
+            />
+            <Table entries={entries} />
+
+            <PaginationControls
+              from={from}
+              to={to}
+              total={total}
+              onPreviousClick={() => setPage(page - 1)}
+              page={page}
+              pages={pages}
+              onNextClick={() => setPage(page + 1)}
+            />
+          </>
+        )}
       </main>
     </>
   );

@@ -1,0 +1,7 @@
+tbody tr:nth-child(even) {
+  background: #ffffff;
+}
+
+tbody tr:nth-child(odd) {
+  background: #e8f0fe;
+}
