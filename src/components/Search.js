@@ -1,6 +1,6 @@
 import React from 'react';
 import './Search.css';
-import { LIMIT_OPTIONS } from './constants';
+import { ENTRIES_PER_PAGE_OPTIONS } from 'config';
 
 const Search = ({ limit, onLimitChange, onSearchChange }) => (
   <div className="search">
@@ -11,7 +11,7 @@ const Search = ({ limit, onLimitChange, onSearchChange }) => (
         value={limit}
         onChange={event => onLimitChange(event.target.value)}
       >
-        {LIMIT_OPTIONS.map(limit => (
+        {ENTRIES_PER_PAGE_OPTIONS.map(limit => (
           <option key={limit} value={limit}>
             {limit}
           </option>
