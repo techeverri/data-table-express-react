@@ -11,7 +11,7 @@ const Table = ({ entries, statuses, onFilterChange }) => (
           Status
           <br />
           <select onChange={event => onFilterChange(event.target.value)}>
-            <option></option>
+            <option value="">--Filter by status--</option>
             {statuses.map(status => (
               <option key={status} value={status}>
                 {status}
