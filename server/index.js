@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 app.get('/ping', (req, res) => res.send('pong'));
 
 app.get('/data', async (req, res) => {
-  const { page, limit, search, filterBy } = req.query;
+  const { page, limit, search, filterBy, sortBy, order } = req.query;
 
   let data;
 
@@ -40,6 +40,12 @@ app.get('/data', async (req, res) => {
     const fuse = new Fuse(data, options);
 
     data = fuse.search(search);
+  }
+
+  if (sortBy) {
+    data = data.sort(
+      (a, b) => (a[sortBy] > b[sortBy] ? 1 : -1) * (order === 'asc' ? 1 : -1)
+    );
   }
 
   const start = (page - 1) * limit;

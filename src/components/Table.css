@@ -14,3 +14,7 @@ tbody tr:nth-child(even) {
 tbody tr:nth-child(odd) {
   background: #e8f0fe;
 }
+
+.table__sort-by {
+  cursor: pointer;
+}

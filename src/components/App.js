@@ -1,7 +1,7 @@
 import PaginationControls from 'components/PaginationControls';
 import Search from 'components/Search';
 import Table from 'components/Table';
-import { ENTRIES_PER_PAGE, INITIAL_PAGE } from 'config';
+import { ENTRIES_PER_PAGE, INITIAL_PAGE, SORT_BY, ORDER } from 'config';
 import useDebounce from 'hooks/useDebounce';
 import qs from 'qs';
 import React, { useEffect, useState } from 'react';
@@ -17,6 +17,9 @@ function App() {
 
   const [filterBy, setFilterBy] = useState('');
 
+  const [sortBy, setSortBy] = useState(SORT_BY.ID);
+  const [order, setOrder] = useState(ORDER.ASC);
+
   useEffect(() => {
     const fetchData = async () => {
       const query = qs.stringify({
@@ -24,6 +27,8 @@ function App() {
         limit,
         search: debouncedSearch,
         filterBy,
+        sortBy,
+        order,
       });
       const path = '/data';
       const url = `${path}?${query}`;
@@ -42,7 +47,7 @@ function App() {
     };
 
     fetchData();
-  }, [page, limit, debouncedSearch, filterBy]);
+  }, [page, limit, debouncedSearch, filterBy, sortBy, order]);
 
   const { entries, from, to, total, pages, statuses } = data;
 
@@ -65,6 +70,15 @@ function App() {
               entries={entries}
               statuses={statuses}
               onFilterChange={filter => setFilterBy(filter)}
+              onSortByClick={selectedSortBy => {
+                setSortBy(selectedSortBy);
+
+                if (selectedSortBy === sortBy) {
+                  setOrder(order === ORDER.ASC ? ORDER.DESC : ORDER.ASC);
+                } else {
+                  setOrder(ORDER.ASC);
+                }
+              }}
             />
 
             <PaginationControls
