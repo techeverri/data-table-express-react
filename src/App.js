@@ -8,7 +8,7 @@ import Table from './Table';
 import useDebounce from './useDebounce';
 
 function App() {
-  const [data, setData] = useState({ entries: [] });
+  const [data, setData] = useState({});
   const [page, setPage] = useState(INITIAL_PAGE);
   const [limit, setLimit] = useState(ENTRIES_PER_PAGE);
 
@@ -52,7 +52,7 @@ function App() {
         <h1>Data Table</h1>
       </header>
       <main>
-        {entries.length === 0 ? (
+        {typeof entries === 'undefined' ? (
           <div>Loading...</div>
         ) : (
           <>
