@@ -44,13 +44,13 @@ app.get('/data', async (req, res) => {
 
   const start = (page - 1) * limit;
   const end = page * limit;
-  const paginatedData = data.slice(start, end);
+  const entries = data.slice(start, end);
 
   const total = data.length;
   const pages = Math.ceil(total / limit);
 
   return res.json({
-    entries: paginatedData,
+    entries,
     limit,
     page,
     from: start + 1,
