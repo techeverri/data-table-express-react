@@ -15,22 +15,36 @@ function App() {
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search, 250);
 
+  const [filterBy, setFilterBy] = useState('');
+
   useEffect(() => {
     const fetchData = async () => {
-      const query = qs.stringify({ page, limit, search: debouncedSearch });
+      const query = qs.stringify({
+        page,
+        limit,
+        search: debouncedSearch,
+        filterBy,
+      });
       const path = '/data';
       const url = `${path}?${query}`;
 
       const response = await fetch(url);
 
-      const { entries, from, to, total, pages } = await response.json();
-      setData({ entries, from, to, total, pages });
+      const {
+        entries,
+        from,
+        to,
+        total,
+        pages,
+        statuses,
+      } = await response.json();
+      setData({ entries, from, to, total, pages, statuses });
     };
 
     fetchData();
-  }, [page, limit, debouncedSearch]);
+  }, [page, limit, debouncedSearch, filterBy]);
 
-  const { entries, from, to, total, pages } = data;
+  const { entries, from, to, total, pages, statuses } = data;
 
   return (
     <>
@@ -47,7 +61,11 @@ function App() {
               onLimitChange={limit => setLimit(limit)}
               onSearchChange={search => setSearch(search)}
             />
-            <Table entries={entries} />
+            <Table
+              entries={entries}
+              statuses={statuses}
+              onFilterChange={filter => setFilterBy(filter)}
+            />
 
             <PaginationControls
               from={from}

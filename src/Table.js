@@ -1,13 +1,22 @@
 import React from 'react';
 import './Table.css';
 
-const Table = ({ entries }) => (
+const Table = ({ entries, statuses, onFilterChange }) => (
   <table>
     <thead>
       <tr>
         <th>Id</th>
         <th>Name</th>
-        <th>Status</th>
+        <th>
+          Status
+          <br />
+          <select onChange={event => onFilterChange(event.target.value)}>
+            <option></option>
+            {statuses.map(status => (
+              <option value={status}>{status}</option>
+            ))}
+          </select>
+        </th>
         <th>Description</th>
         <th>Delta</th>
         <th>CreatedOn</th>

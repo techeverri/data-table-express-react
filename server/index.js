@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 app.get('/ping', (req, res) => res.send('pong'));
 
 app.get('/data', async (req, res) => {
-  const { page, limit, search } = req.query;
+  const { page, limit, search, filterBy } = req.query;
 
   let data;
 
@@ -30,6 +30,10 @@ app.get('/data', async (req, res) => {
 
   let statuses = data.map(entry => entry.status);
   statuses = [...new Set(statuses)].sort();
+
+  if (filterBy) {
+    data = data.filter(entry => entry.status === filterBy);
+  }
 
   if (search) {
     const options = { keys: ['name'] };
