@@ -36,7 +36,7 @@ app.get('/data', async (req, res) => {
   }
 
   if (search) {
-    const options = { keys: ['name'] };
+    const options = { keys: ['name'], threshold: 0.4 };
     const fuse = new Fuse(data, options);
 
     data = fuse.search(search);
