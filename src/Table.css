@@ -2,6 +2,11 @@ table {
   width: 100%;
 }
 
+thead th,
+tbody td {
+  padding: 0.7rem;
+}
+
 tbody tr:nth-child(even) {
   background: #ffffff;
 }
