@@ -1,3 +1,9 @@
 body {
   margin: 0rem 2rem;
 }
+
+input,
+select,
+button {
+  font-size: 1rem;
+}
