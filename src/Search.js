@@ -12,7 +12,9 @@ const Search = ({ limit, onLimitChange, onSearchChange }) => (
         onChange={event => onLimitChange(event.target.value)}
       >
         {LIMIT_OPTIONS.map(limit => (
-          <option value={limit}>{limit}</option>
+          <option key={limit} value={limit}>
+            {limit}
+          </option>
         ))}
       </select>{' '}
       entries
