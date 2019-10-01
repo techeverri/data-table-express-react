@@ -1,4 +1,25 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Docker
+
+### `docker build -t data-table-express-react .`
+
+Builds the Docker image. The `-t` flag lets you tag your image so it's easier to find later using the `docker images` command.
+
+### `docker run -p 8080:8080 -d data-table-express-react`
+
+Starts the app in a new container from the `data-table-express-react` image.<br>
+Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
+
+### `docker ps`
+
+Useful to get the container ID
+
+### `docker exec -it <CONTAINER ID> bash`
+
+Runs bash inside the container
+
+### `docker stop <CONTAINER ID>`
+
+Stops the running container
 
 ## Available Scripts
 
