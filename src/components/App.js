@@ -49,6 +49,10 @@ function App() {
     fetchData();
   }, [page, limit, debouncedSearch, filterBy, sortBy, order]);
 
+  useEffect(() => {
+    setPage(1);
+  }, [filterBy, debouncedSearch, limit]);
+
   const { entries, from, to, total, pages, statuses } = data;
 
   const hasEntries = entries && Array.isArray(entries) && entries.length > 0;
