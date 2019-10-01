@@ -52,6 +52,8 @@ function App() {
             <Table
               entries={entries}
               statuses={statuses}
+              sortBy={sortBy}
+              order={order}
               onFilterChange={filter => setFilterBy(filter)}
               onSortByClick={selectedSortBy => {
                 setSortBy(selectedSortBy);

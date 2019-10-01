@@ -1,11 +1,30 @@
 import React from 'react';
 import './Table.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSort } from '@fortawesome/free-solid-svg-icons';
-import { SORT_BY } from 'config';
+import {
+  faSort,
+  faSortDown,
+  faSortUp,
+} from '@fortawesome/free-solid-svg-icons';
+import { SORT_BY, ORDER } from 'config';
 import { format } from 'date-fns';
 
-const Table = ({ entries, statuses, onFilterChange, onSortByClick }) => (
+const INACTIVE_SORT_BY_COLOR = 'lightgray';
+
+const getSortByIconColor = column => sortBy =>
+  sortBy !== column ? INACTIVE_SORT_BY_COLOR : null;
+
+const getSortByIcon = ({ column, sortBy, order }) =>
+  sortBy !== column ? faSort : order === ORDER.ASC ? faSortUp : faSortDown;
+
+const Table = ({
+  entries,
+  statuses,
+  sortBy,
+  order,
+  onFilterChange,
+  onSortByClick,
+}) => (
   <table>
     <thead>
       <tr>
@@ -13,13 +32,23 @@ const Table = ({ entries, statuses, onFilterChange, onSortByClick }) => (
           className="table__header-id table__sort-by"
           onClick={() => onSortByClick(SORT_BY.ID)}
         >
-          Id <FontAwesomeIcon icon={faSort} pull="right" />
+          Id{' '}
+          <FontAwesomeIcon
+            icon={getSortByIcon({ column: SORT_BY.ID, sortBy, order })}
+            pull="right"
+            color={getSortByIconColor(SORT_BY.ID)(sortBy)}
+          />
         </th>
         <th
           className="table__header-name table__sort-by"
           onClick={() => onSortByClick(SORT_BY.NAME)}
         >
-          Name <FontAwesomeIcon icon={faSort} pull="right" />
+          Name{' '}
+          <FontAwesomeIcon
+            icon={getSortByIcon({ column: SORT_BY.NAME, sortBy, order })}
+            pull="right"
+            color={getSortByIconColor(SORT_BY.NAME)(sortBy)}
+          />
         </th>
         <th className="table__header-status">
           Status
@@ -39,7 +68,12 @@ const Table = ({ entries, statuses, onFilterChange, onSortByClick }) => (
           className="table__header-created table__sort-by"
           onClick={() => onSortByClick(SORT_BY.CREATED_ON)}
         >
-          CreatedOn <FontAwesomeIcon icon={faSort} pull="right" />
+          CreatedOn{' '}
+          <FontAwesomeIcon
+            icon={getSortByIcon({ column: SORT_BY.CREATED_ON, sortBy, order })}
+            pull="right"
+            color={getSortByIconColor(SORT_BY.CREATED_ON)(sortBy)}
+          />
         </th>
       </tr>
     </thead>
