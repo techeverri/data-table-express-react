@@ -10,18 +10,18 @@ const Table = ({ entries, statuses, onFilterChange, onSortByClick }) => (
     <thead>
       <tr>
         <th
-          className="table__sort-by"
+          className="table__header-id table__sort-by"
           onClick={() => onSortByClick(SORT_BY.ID)}
         >
           Id <FontAwesomeIcon icon={faSort} pull="right" />
         </th>
         <th
-          className="table__sort-by"
+          className="table__header-name table__sort-by"
           onClick={() => onSortByClick(SORT_BY.NAME)}
         >
           Name <FontAwesomeIcon icon={faSort} pull="right" />
         </th>
-        <th>
+        <th className="table__header-status">
           Status
           <br />
           <select onChange={event => onFilterChange(event.target.value)}>
@@ -33,10 +33,10 @@ const Table = ({ entries, statuses, onFilterChange, onSortByClick }) => (
             ))}
           </select>
         </th>
-        <th>Description</th>
-        <th>Delta</th>
+        <th className="table__header-description">Description</th>
+        <th className="table__header-delta">Delta</th>
         <th
-          className="table__sort-by"
+          className="table__header-created table__sort-by"
           onClick={() => onSortByClick(SORT_BY.CREATED_ON)}
         >
           CreatedOn <FontAwesomeIcon icon={faSort} pull="right" />

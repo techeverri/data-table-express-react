@@ -18,3 +18,27 @@ tbody tr:nth-child(odd) {
 .table__sort-by {
   cursor: pointer;
 }
+
+.table__header-id {
+  width: 50px;
+}
+
+.table__header-name {
+  width: 200px;
+}
+
+.table__header-status {
+  width: 180px;
+}
+
+.table__header-description {
+  width: auto;
+}
+
+.table__header-delta {
+  width: 50px;
+}
+
+.table__header-created {
+  width: 130px;
+}
