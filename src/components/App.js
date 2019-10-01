@@ -3,12 +3,11 @@ import Search from 'components/Search';
 import Table from 'components/Table';
 import { ENTRIES_PER_PAGE, INITIAL_PAGE, SORT_BY, ORDER } from 'config';
 import useDebounce from 'hooks/useDebounce';
-import qs from 'qs';
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import useData from 'hooks/useData';
 
 function App() {
-  const [data, setData] = useState({});
   const [page, setPage] = useState(INITIAL_PAGE);
   const [limit, setLimit] = useState(ENTRIES_PER_PAGE);
 
@@ -21,39 +20,17 @@ function App() {
   const [order, setOrder] = useState(ORDER.ASC);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const query = qs.stringify({
-        page,
-        limit,
-        search: debouncedSearch,
-        filterBy,
-        sortBy,
-        order,
-      });
-      const path = '/data';
-      const url = `${path}?${query}`;
-
-      const response = await fetch(url);
-
-      const {
-        entries,
-        from,
-        to,
-        total,
-        pages,
-        statuses,
-      } = await response.json();
-      setData({ entries, from, to, total, pages, statuses });
-    };
-
-    fetchData();
-  }, [page, limit, debouncedSearch, filterBy, sortBy, order]);
-
-  useEffect(() => {
     setPage(1);
   }, [filterBy, debouncedSearch, limit]);
 
-  const { entries, from, to, total, pages, statuses } = data;
+  const { entries, from, to, total, pages, statuses } = useData({
+    page,
+    limit,
+    search: debouncedSearch,
+    filterBy,
+    sortBy,
+    order,
+  });
 
   const hasEntries = entries && Array.isArray(entries) && entries.length > 0;
 
