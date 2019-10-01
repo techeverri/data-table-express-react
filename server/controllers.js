@@ -53,7 +53,7 @@ export const dataController = async (req, res) => {
     limit,
     page,
     from: start + 1,
-    to: end,
+    to: end > total ? total : end,
     total,
     pages,
     statuses,
