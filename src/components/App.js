@@ -51,6 +51,8 @@ function App() {
 
   const { entries, from, to, total, pages, statuses } = data;
 
+  const hasEntries = entries && Array.isArray(entries) && entries.length > 0;
+
   return (
     <>
       <header>
@@ -81,15 +83,17 @@ function App() {
               }}
             />
 
-            <PaginationControls
-              from={from}
-              to={to}
-              total={total}
-              onPreviousClick={() => setPage(page - 1)}
-              page={page}
-              pages={pages}
-              onNextClick={() => setPage(page + 1)}
-            />
+            {hasEntries && (
+              <PaginationControls
+                from={from}
+                to={to}
+                total={total}
+                onPreviousClick={() => setPage(page - 1)}
+                page={page}
+                pages={pages}
+                onNextClick={() => setPage(page + 1)}
+              />
+            )}
           </>
         )}
       </main>
