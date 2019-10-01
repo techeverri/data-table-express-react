@@ -16,6 +16,11 @@ export const dataController = async (req, res) => {
 
   data = data.filter(entry => entry.createdOn);
 
+  data = data.map(entry => ({
+    ...entry,
+    createdOn: new Date(entry.createdOn).getTime(),
+  }));
+
   let statuses = data.map(entry => entry.status);
   statuses = [...new Set(statuses)].sort();
 
