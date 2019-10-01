@@ -14,6 +14,8 @@ export const dataController = async (req, res) => {
     return res.sendStatus(500);
   }
 
+  data = data.filter(entry => entry.createdOn);
+
   let statuses = data.map(entry => entry.status);
   statuses = [...new Set(statuses)].sort();
 
