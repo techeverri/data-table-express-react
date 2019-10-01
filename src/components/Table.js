@@ -3,6 +3,7 @@ import './Table.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSort } from '@fortawesome/free-solid-svg-icons';
 import { SORT_BY } from 'config';
+import { format } from 'date-fns';
 
 const Table = ({ entries, statuses, onFilterChange, onSortByClick }) => (
   <table>
@@ -44,16 +45,23 @@ const Table = ({ entries, statuses, onFilterChange, onSortByClick }) => (
     </thead>
     <tbody>
       {entries.length > 0 ? (
-        entries.map((item, index) => (
-          <tr key={index}>
-            <td>{item.id}</td>
-            <td>{item.name}</td>
-            <td>{item.status}</td>
-            <td>{item.description}</td>
-            <td>{item.delta}</td>
-            <td>{item.createdOn}</td>
-          </tr>
-        ))
+        entries.map((entry, index) => {
+          const createdOn = format(
+            new Date(entry.createdOn),
+            'yyyy-MM-dd HH:mm'
+          );
+
+          return (
+            <tr key={index}>
+              <td>{entry.id}</td>
+              <td>{entry.name}</td>
+              <td>{entry.status}</td>
+              <td>{entry.description}</td>
+              <td>{entry.delta}</td>
+              <td>{createdOn}</td>
+            </tr>
+          );
+        })
       ) : (
         <tr>
           <td colSpan={6}>No matching records found</td>
