@@ -1,3 +1,14 @@
+## System requirements
+
+Make sure you have either:
+
+- [Node.js](https://nodejs.org/) v10.16.0 or greater
+- [Yarn](https://yarnpkg.com/) v1.16.0 or greater (optional)
+
+or
+
+- [Docker](https://docs.docker.com/install/)
+
 ## Docker
 
 ### `docker build -t data-table-express-react .`
