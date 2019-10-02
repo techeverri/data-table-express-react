@@ -14,6 +14,8 @@ export const dataController = async (req, res) => {
     return res.sendStatus(500);
   }
 
+  // To be able to sort by `createdOn` there should be some consistency in the records
+  // So this removes records where the `createdOn` property is either empty string, zero, or missing
   data = data.filter(entry => entry.createdOn);
 
   data = data.map(entry => ({
