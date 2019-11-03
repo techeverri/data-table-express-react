@@ -9,6 +9,15 @@ or
 
 - [Docker](https://docs.docker.com/install/)
 
+## Development
+
+To run the service you need to provide the following environment variables
+
+```
+PORT=8080
+API_URL=https://api.example.com/data.json
+```
+
 ## Docker
 
 ### `docker build -t data-table-express-react .`
