@@ -18,9 +18,9 @@
     "react-scripts": "3.1.2"
   },
   "scripts": {
-    "server:start": "node -r esm server/index.js",
-    "server:dev": "nodemon -r esm server/index.js",
-    "server:debug": "nodemon -r esm --inspect-brk server/index.js",
+    "server:start": "node -r dotenv/config -r esm server/index.js",
+    "server:dev": "nodemon -r dotenv/config -r esm server/index.js",
+    "server:debug": "nodemon -r dotenv/config -r esm --inspect-brk server/index.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
