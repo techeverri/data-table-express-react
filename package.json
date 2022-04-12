@@ -2,6 +2,10 @@
   "name": "data-table-express-react",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "^16.14.0",
+    "yarn": "^1.22.17"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
