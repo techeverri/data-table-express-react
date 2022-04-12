@@ -2,6 +2,7 @@
   "name": "data-table-express-react",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "engines": {
     "node": "^16.14.0",
     "yarn": "^1.22.17"
