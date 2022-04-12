@@ -1,11 +1,11 @@
-import PaginationControls from 'components/PaginationControls';
-import Search from 'components/Search';
-import Table from 'components/Table';
+import PaginationControls from 'components/PaginationControls.js';
+import Search from 'components/Search.js';
+import Table from 'components/Table.js';
 import { ENTRIES_PER_PAGE, INITIAL_PAGE, SORT_BY, ORDER } from 'config';
-import useDebounce from 'hooks/useDebounce';
+import useDebounce from 'hooks/useDebounce.js';
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import useData from 'hooks/useData';
+import useData from 'hooks/useData.js';
 
 function App() {
   const [page, setPage] = useState(INITIAL_PAGE);

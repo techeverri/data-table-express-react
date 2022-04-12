@@ -1,10 +1,13 @@
 import express from 'express';
 import path from 'path';
-import { dataController } from './controllers';
+import url from "url";
+import { dataController } from './controllers.js';
 
 const app = express();
 
 const PORT = process.env.PORT || 9000;
+
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 app.use(express.static(path.join(__dirname, '..', 'build')));
 

@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { API_URL } from './config';
+import { API_URL } from './config.js';
 import Fuse from 'fuse.js';
 
 export const dataController = async (req, res) => {
