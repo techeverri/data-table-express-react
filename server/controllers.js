@@ -34,7 +34,7 @@ export const dataController = async (req, res) => {
     const options = { keys: ['name'], threshold: 0.4 };
     const fuse = new Fuse(data, options);
 
-    data = fuse.search(search);
+    data = fuse.search(search).map(({item}) => item /** remove `refIndex` from `fuse.js` result */);
   }
 
   if (sortBy) {
