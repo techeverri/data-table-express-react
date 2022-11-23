@@ -1,7 +1,3 @@
-## Demo
-
-https://data-table-express-react.herokuapp.com/
-
 ## Trello
 
 https://trello.com/b/cs18eD6j/datatable-react-express
